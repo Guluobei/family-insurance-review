@@ -1,0 +1,34 @@
+[
+  {
+    "holder": "户主",
+    "name": "平安平安福终身寿险",
+    "type": "寿险",
+    "coverage": 1000000,
+    "premium": 12000,
+    "currency": "CNY"
+  },
+  {
+    "holder": "配偶",
+    "name": "友邦友如意重疾险",
+    "type": "重疾",
+    "coverage": 300000,
+    "premium": 8000,
+    "currency": "CNY"
+  },
+  {
+    "holder": "户主",
+    "name": "众安尊享e生医疗险",
+    "type": "医疗",
+    "coverage": 6000000,
+    "premium": 800,
+    "currency": "CNY"
+  },
+  {
+    "holder": "户主",
+    "name": "平安e生保医疗险",
+    "type": "医疗",
+    "coverage": 6000000,
+    "premium": 600,
+    "currency": "CNY"
+  }
+]

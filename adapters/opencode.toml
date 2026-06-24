@@ -1,0 +1,17 @@
+[skill]
+name = "family-insurance-review"
+version = "3.2"
+entry = "SKILL.md"
+script = "insurance_review.py"
+
+[triggers]
+keywords = ["保单检视", "家庭保险", "policy review", "insurance analysis"]
+
+[privacy]
+tier = "high"
+sandbox = true
+working_dir = "/data/user/work/insurance/"
+
+[execution]
+python_version = ">=3.8"
+dependencies = []

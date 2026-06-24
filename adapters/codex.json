@@ -1,0 +1,19 @@
+{
+  "skill_name": "family-insurance-review",
+  "version": "3.2",
+  "main": "SKILL.md",
+  "executable": "insurance_review.py",
+  "intent_patterns": [
+    "保单检视",
+    "家庭保险",
+    "policy review",
+    "insurance analysis"
+  ],
+  "sandbox_config": {
+    "enabled": true,
+    "max_memory_mb": 256,
+    "timeout_seconds": 30
+  },
+  "tools": ["read_file", "write_file", "run_python"],
+  "privacy_notice": "本 Skill 处理敏感保单信息"
+}

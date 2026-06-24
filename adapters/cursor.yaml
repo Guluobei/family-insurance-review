@@ -1,0 +1,19 @@
+skill:
+  name: family-insurance-review
+  version: 3.2
+  entry: SKILL.md
+  executable: insurance_review.py
+
+triggers:
+  - 保单检视
+  - 家庭保险
+  - policy review
+
+workspace:
+  sandbox: true
+  working_directory: ./.cursor/sandbox/insurance/
+  output_directory: ./insurance-reports/
+
+privacy:
+  tier: high
+  consent_required: true

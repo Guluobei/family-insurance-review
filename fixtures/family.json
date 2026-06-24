@@ -1,0 +1,6 @@
+{
+  "members": ["户主", "配偶", "子女"],
+  "annual_income": 500000,
+  "debt": 2000000,
+  "dependents": 1
+}

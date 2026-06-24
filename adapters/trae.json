@@ -1,0 +1,18 @@
+{
+  "skill_id": "family-insurance-review",
+  "version": "3.2",
+  "entry": "SKILL.md",
+  "script": "insurance_review.py",
+  "triggers": ["保单检视", "家庭保险", "policy review", "insurance analysis"],
+  "privacy_tier": "high",
+  "sandbox": {
+    "enabled": true,
+    "working_dir": "/data/user/work/insurance/",
+    "output_dir": "/workspace/"
+  },
+  "auto_load": true,
+  "pre_check": {
+    "consent_required": true,
+    "consent_message": "本 Skill 处理保单敏感信息，请确认数据已脱敏"
+  }
+}
