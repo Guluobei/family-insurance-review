@@ -1,6 +1,6 @@
 ---
 name: family-insurance-review
-version: 3.3.0
+version: 3.4.0
 description: 家庭保单检视 Skill - 隐私优先、纯本地、零外部依赖
 platforms: [TRAE, Claude Code, OpenCode, Codex, Cursor]
 privacy: 
@@ -9,7 +9,7 @@ privacy:
   network: disabled
 ---
 
-# 家庭保单检视 Skill V3.3
+# 家庭保单检视 Skill V3.4
 
 > 📋 一份保单进，一份报告出。**零云端、零追踪、零泄露**。
 
@@ -18,7 +18,7 @@ privacy:
 | 能力 | 说明 |
 |---|---|
 | 📂 保单解析 | 支持 JSON 输入 / 本地 PDF 自动解析 |
-| 🛡️ 隐私脱敏 | 身份证/银行卡/手机号自动屏蔽 |
+| 🛡️ 隐私脱敏 | 身份证/银行卡/手机号自动屏蔽（含数字型） |
 | 🔍 缺口诊断 | 寿险/重疾/医疗/年金 4 大维度 |
 | ⚠️ 冲突检测 | 医疗险重复、现金价值质押提示 |
 | 💱 多币种 | CNY/HKD/USD/EUR 自动换算 |
@@ -36,7 +36,7 @@ cat > policies.json <<'EOF'
 ]
 EOF
 
-# 方式 B：本地 PDF（V3.3 新增，不上传云端）
+# 方式 B：本地 PDF（不上传云端）
 python pdf_parser.py ./我的保单/ -o policies.json
 ```
 
@@ -59,21 +59,21 @@ python insurance_review.py \
 ## 🛡️ 隐私保护（7 层防护）
 
 1. **默认脱敏**：所有输出报告，敏感字段已 `****` 屏蔽
-2. **`--anonymize`**：输入前再次强制脱敏
-3. **`--safe-mode`**：禁用任何外部网络调用
+2. **`--anonymize`**：输入前再次强制脱敏（含数字型 ID）
+3. **`--safe-mode`**：禁用代理 + 纯本地运行
 4. **`--local-pdf`**：PDF 在本地解析，不传给 AI
 5. **零外部依赖**：核心仅用 Python 标准库
 6. **零日志输出**：不写日志文件
 7. **零云存储**：报告只写到本地 `-o` 指定路径
 
-## 🔧 CLI 参数（V3.3 共 5 个）
+## 🔧 CLI 参数
 
 | 参数 | 说明 | 默认 |
 |---|---|---|
 | `-p, --policies` | 保单 JSON 路径 | `policies.json` |
 | `-f, --family` | 家庭信息 JSON 路径 | `family.json` |
 | `-o, --output` | 报告输出路径 | `report.html` |
-| `--safe-mode` | 安全模式（禁用网络） | 关 |
+| `--safe-mode` | 安全模式（禁用代理+网络） | 关 |
 | `--anonymize` | 强制全量脱敏 | 关 |
 | `--local-pdf DIR` | 本地 PDF 目录自动解析 | 无 |
 
@@ -107,6 +107,7 @@ TRAE 提供远程沙盒环境，目录约定：
 # 1. 上传代码到沙盒临时目录
 cp insurance_review.py /data/user/work/
 cp pdf_parser.py /data/user/work/
+cp privacy.py /data/user/work/
 cp policies.json /data/user/work/
 
 # 2. 在沙盒中跑测试
@@ -146,13 +147,14 @@ cp report.html /workspace/
 ```
 family-insurance-review/
 ├── SKILL.md              # 本文件（Skill 入口）
-├── insurance_review.py   # 核心 60 行实现
-├── pdf_parser.py         # V3.3 本地 PDF 解析器
-├── tests/                # 测试套件（V3.3 新增）
-│   ├── test_v33_safe_mode.py
-│   ├── test_v33_anonymize.py
-│   └── test_v33_local_pdf.py
-├── docs.html             # 可视化使用文档
+├── insurance_review.py   # 核心实现（V3.4）
+├── pdf_parser.py         # 本地 PDF 解析器
+├── privacy.py            # V3.4 共享隐私模块（mask/anonymize/classify）
+├── tests/                # 测试套件（85 个测试）
+│   ├── test_v33_anonymize.py    # 脱敏/分类测试
+│   ├── test_v33_safe_mode.py    # CLI/错误处理测试
+│   ├── test_v33_local_pdf.py    # PDF 解析测试
+│   └── test_core_logic.py       # 核心业务逻辑测试
 ├── README.md             # 英文版说明
 └── CHANGELOG.md          # 变更日志
 ```
@@ -163,4 +165,4 @@ family-insurance-review/
 最终决策请咨询持牌保险代理人 / 经纪人。
 
 ---
-**版本**: V3.3 | **更新**: 2026-06 | **许可**: MIT
+**版本**: V3.4 | **更新**: 2026-06 | **许可**: MIT
